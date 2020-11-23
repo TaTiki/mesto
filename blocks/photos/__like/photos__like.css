@@ -1,0 +1,7 @@
+.photos__like {
+  position: absolute;
+  bottom: 26px;
+  left: 250px;
+  max-width: 30px;
+  text-align: center;
+}

@@ -12,16 +12,34 @@
     <img class="header__logo" src="images/logo.svg" alt="логотип">
   </header>
   <main>
-  <div class="profile">
-    <div class="user">
-      <div class="user__avatar"></div>
-      <div class="user__info">
-        <h1 class="user__name"></h1>
-        <p class="user__work"></p>
-        <button class="button user__edit">Edit</button>
+    <section class="profile">
+      <div class="profile__container">
+        <div class="profile__avatar">
+          <img class="profile__picture" src="./images/avatar.jpg" alt="Аватар">
+        </div>
+        <div class="profile__data">
+          <div class="profile__info">
+            <h1 class="profile__name"> Жак-Ив Кусто</h1>
+            <p class="profile__hobby">Исследователь океана</p>
+          </div>
+          <button class="profile__edit-button" aria-label="редактировать профиль"></button>
+        </div>
       </div>
-      <button class="button user__button">+</button>
-    </div>
+      <button class="profile__add-button" aria-label="добавить фотографии"></button>
+    </section>
+    <section class="photos">
+      <ul class="photos__list">
+        <li class="photos__card">
+          <figure class="photos__figure">
+            <img class="photos__image" src="./images/karachaevsk.jpg" alt="картинка">
+            <figcaption class="photos__figcaption">Карачаевск</figcaption> 
+          </figure>
+          <div class="photos__like">
+            <button class="photos__like-button" aria-label="лайк"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
   </div>
 </div>
 </body>
