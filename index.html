@@ -8,46 +8,46 @@
 </head>
 <body>
   <div class="page">
-  <header class="header">
-    <img class="header__logo" src="images/logo.svg" alt="логотип">
-  </header>
-  <main>
-    <section class="profile">
-      <div class="profile__container">
-        <div class="profile__avatar">
-          <img class="profile__picture" src="./images/avatar.jpg" alt="Аватар">
-        </div>
-        <div class="profile__data">
-          <div class="profile__info">
-            <h1 class="profile__name"> Жак-Ив Кусто</h1>
-            <p class="profile__hobby">Исследователь океана</p>
+    <header class="header">
+      <img class="header__logo" src="images/logo.svg" alt="логотип">
+    </header>
+    <main>
+      <section class="profile">
+        <div class="profile__container">
+          <div class="profile__avatar">
+            <img class="profile__picture" src="./images/avatar.jpg" alt="Аватар">
           </div>
-          <button class="profile__edit-button" aria-label="редактировать профиль"></button>
+          <div class="profile__data">
+            <div class="profile__info">
+              <h1 class="profile__name"> Жак-Ив Кусто</h1>
+              <p class="profile__hobby">Исследователь океана</p>
+            </div>
+            <button class="profile__edit-button" aria-label="редактировать профиль"></button>
+          </div>
         </div>
-      </div>
-      <button class="profile__add-button" aria-label="добавить фотографии"></button>
-    </section>
-    <section class="photos">
-      <ul class="photos__list">
-      </ul>
-    </section>
+        <button class="profile__add-button" aria-label="добавить фотографии"></button>
+      </section>
+      <section class="photos">
+        <ul class="photos__list">
+        </ul>
+      </section>
     </main>
     <footer class="footer">
       <p class="footer__author">&copy; 2020 Mesto Russia</p>
     </footer>
     <div class="popup">
       <div class="popup__container">
-             <form class="form">
-               <h3 class="form__header">Редактировать профиль</h3>
-               <fieldset class="form__fieldset">
-                 <input class="form__input" type="text" id="name" aria-label="имя">
-                 <input class="form__input" type="text" id="caption" aria-label="подпись">
-                 <button class="form__save-btn">Сохранить</button>
-               </fieldset>
-               <button class="popup__close-btn" type="reset" aria-label="Закрыть форму"></button>
-             </form>
-           </div>
-           </div>
+        <form class="form">
+          <h3 class="form__header">Редактировать профиль</h3>
+          <fieldset class="form__fieldset">
+            <input class="form__input" type="text" id="name" aria-label="имя">
+            <input class="form__input" type="text" id="caption" aria-label="подпись">
+            <button class="form__save-btn">Сохранить</button>
+          </fieldset>
+          <button class="popup__close-btn" type="reset" aria-label="Закрыть форму"></button>
+        </form>
+      </div>
+    </div>
   </div>
   <script src="./index.js"></script>
 </body>
