@@ -1,88 +1,47 @@
-const cards = [
-  {
-    title: 'Карачаевск', 
-    photo: 'images/karachaevsk.jpg',
-  }, {
-    title: 'Гора Эльбрус',
-    photo: 'images/elbrus.jpg',
-  }, {
-    title: 'Домбай',
-    photo: 'images/dombai.jpg',
-  }
-]
-
-const containerPhotos = document.querySelector('.photos__list');
-
-function renderCards() {
-  cards.forEach(card => {
-    console.log(card);
-    containerPhotos.innerHTML += '<li class="photos__card">\
-    <figure class="photos__figure">\
-      <img class="photos__image" src="'+card['photo']+'" alt="картинка">\
-      <figcaption class="photos__figcaption">'+card['title']+'</figcaption> \
-    </figure>\
-    <div class="photos__like">\
-      <button class="photos__like-button" aria-label="лайк" value=""></button>\
-    </div>\
-  </li>'
-  });
-}
-
 let openForm = document.querySelector('.profile__edit-button');
 let popupElement = document.querySelector('.popup');
+let formElement = document.querySelector('.form');
+let formName = document.querySelector('#name');
+let formHobby = document.querySelector('#caption');
+let profileName = document.querySelector('.profile__name');
+let profileHobby = document.querySelector('.profile__hobby');
+let closeFormBtn = document.querySelector('.popup__close-btn');
+let photoLikeBtn = document.querySelectorAll('.photos__like-button');
 
-function showForm (evt, visible) {
+function showForm (evt){
   evt.preventDefault();
-  if (visible) { 
-    document.querySelector('#name').value = document.querySelector('.profile__name').innerHTML;
-    document.querySelector('#caption').value = document.querySelector('.profile__hobby').innerHTML;
-    popupElement.style.visibility='visible';
-    popupElement.style.opacity=1; 
-  }else {
-    popupElement.style.visibility='hidden';
+  if (popupElement.className === 'popup'){ 
+    formName.value = profileName.textContent;
+    formHobby.value = profileHobby.textContent;
+    popupElement.className = 'popup.popup__opened';
+  }else{
+    popupElement.className = 'popup';
   }
 }
 
-openForm.addEventListener('click', (evt)=> {showForm(evt, true)});
-
-let formElement = document.querySelector('.form');
-
-function formSubmitHandler(evt) {
-    evt.preventDefault();
-   
-    let nameInput = document.querySelector('#name');
-    let jobInput = document.querySelector('#caption');
-    console.log(nameInput.value);
-    
-    document.querySelector('.profile__name').innerHTML = nameInput.value;
-    document.querySelector('.profile__hobby').innerHTML = jobInput.value;
-    showForm (evt, false);
+function formSubmitHandler(evt){
+    profileName.textContent = formName.value;
+    profileHobby.textContent = formHobby.value;
+    showForm(evt);
 }
 
-
-formElement.addEventListener('submit', formSubmitHandler); 
-
-document.querySelector('.popup__close-btn').addEventListener('click',  (evt)=> {showForm(evt, false)});
-
-function like(evt) {
+function like(evt){
   evt.preventDefault();
   let icon = evt.target;
   let state = icon.value;
-  if (state === '') {
+  if (state === ''){
     icon.value = 'like';
     icon.style.backgroundImage="url('images/likeactive.svg')";
-  }else {
+  }else{
     icon.value = '';
     icon.style.backgroundImage="url('images/like.svg')";
   }
 }
 
-
-renderCards();
-const card = cards.shift();
-cards.push(card);
-renderCards(); 
-
-document.querySelectorAll('.photos__like-button').forEach(button => {
+photoLikeBtn.forEach(button => {
   button.addEventListener('click', like);
 });
+
+openForm.addEventListener('click', showForm);
+closeFormBtn.addEventListener('click', showForm);
+formElement.addEventListener('submit', formSubmitHandler); 
