@@ -5,7 +5,7 @@ let formName = document.querySelector('#name');
 let formHobby = document.querySelector('#caption');
 let profileName = document.querySelector('.profile__name');
 let profileHobby = document.querySelector('.profile__hobby');
-let closeFormBtn = document.querySelector('.popup__close-btn');
+let closeFormBtn = document.querySelector('.form__close-btn');
 let photoLikeBtn = document.querySelectorAll('.photos__like-button');
 
 function showForm (evt){
@@ -13,16 +13,17 @@ function showForm (evt){
   if (popupElement.className === 'popup'){ 
     formName.value = profileName.textContent;
     formHobby.value = profileHobby.textContent;
-    popupElement.className = 'popup.popup__opened';
+    popupElement.classList.add('popup_opened')
   }else{
-    popupElement.className = 'popup';
+    popupElement.classList.remove('popup_opened')
   }
 }
 
 function formSubmitHandler(evt){
-    profileName.textContent = formName.value;
-    profileHobby.textContent = formHobby.value;
-    showForm(evt);
+  evt.preventDefault();
+  profileName.textContent = formName.value;
+  profileHobby.textContent = formHobby.value;
+  showForm(evt);
 }
 
 function like(evt){

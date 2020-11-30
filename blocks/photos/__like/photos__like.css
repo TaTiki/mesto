@@ -1,6 +1,6 @@
 .photos__like {
-  position: absolute;
-  bottom: 26px;
+  position: relative;
+  bottom: 50px;
   left: 250px;
   max-width: 30px;
   text-align: center;

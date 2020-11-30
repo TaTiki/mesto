@@ -1,8 +1,8 @@
 .popup__container {
   position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: calc(50% - 165px);
+  left: calc(50% - 220px);
+  /*transform: translateX(-50%);*/
 }
 
 @media screen and (max-height: 450px) {
