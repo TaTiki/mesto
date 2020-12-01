@@ -14,70 +14,58 @@
     <main>
       <section class="profile">
         <div class="profile__container">
-            <img class="profile__picture" src="./images/avatar.jpg" alt="Аватар">
+          <img class="profile__picture" src="./images/avatar.jpg" alt="Аватар">
           <div class="profile__data">
             <div class="profile__info">
               <h1 class="profile__name"> Жак-Ив Кусто</h1>
               <p class="profile__hobby">Исследователь океана</p>
             </div>
-            <button class="profile__edit-button" aria-label="редактировать профиль" type="submit"></button>
+            <button class="profile__edit-button" aria-label="редактировать профиль" type="button"></button>
           </div>
         </div>
-        <button class="profile__add-button" aria-label="добавить фотографии" type="submit" ></button>
+        <button class="profile__add-button" aria-label="добавить фотографии" type="button"></button>
       </section>
       <section class="photos">
         <ul class="photos__list">
           <li class="photos__card">
-            <figure class="photos__figure">
-              <img class="photos__image" src="./images/karachaevsk.jpg" alt="картинка">
-              <figcaption class="photos__figcaption">Карачаевск</figcaption> 
-            </figure>
-            <div class="photos__like">
+            <img class="photos__image" src="./images/karachaevsk.jpg" alt="картинка">
+            <div class="photos__info">
+              <h2 class="photos__name">Карачаевск</h2>
+              <button class="photos__like-button" aria-label="лайк" type="button"></button>
+            </div>
+          </li>
+          <li class="photos__card">
+            <img class="photos__image" src="./images/elbrus.jpg" alt="картинка">
+            <div class="photos__info">
+              <h2 class="photos__name">Гора Эльбрус</h2>
               <button class="photos__like-button" aria-label="лайк" type="submit"></button>
             </div>
           </li>
           <li class="photos__card">
-            <figure class="photos__figure">
-              <img class="photos__image" src="./images/elbrus.jpg" alt="картинка">
-              <figcaption class="photos__figcaption">Гора Эльбрус</figcaption> 
-            </figure>
-            <div class="photos__like">
+            <img class="photos__image" src="./images/dombai.jpg" alt="картинка">
+            <div class="photos__info">
+              <h2 class="photos__name">Домбаи</h2>
               <button class="photos__like-button" aria-label="лайк" type="submit"></button>
             </div>
           </li>
           <li class="photos__card">
-            <figure class="photos__figure">
-              <img class="photos__image" src="./images/dombai.jpg" alt="картинка">
-              <figcaption class="photos__figcaption">Домбаи</figcaption> 
-            </figure>
-            <div class="photos__like">
+            <img class="photos__image" src="./images/elbrus.jpg" alt="картинка">
+            <div class="photos__info">
+              <h2 class="photos__name">Гора Эльбрус</h2>
               <button class="photos__like-button" aria-label="лайк" type="submit"></button>
             </div>
           </li>
           <li class="photos__card">
-            <figure class="photos__figure">
-              <img class="photos__image" src="./images/elbrus.jpg" alt="картинка">
-              <figcaption class="photos__figcaption">Гора Эльбрус</figcaption> 
-            </figure>
-            <div class="photos__like">
+            <img class="photos__image" src="./images/dombai.jpg" alt="картинка">
+            <div class="photos__info">
+              <h2 class="photos__name">Домбаи</h2>
               <button class="photos__like-button" aria-label="лайк" type="submit"></button>
             </div>
           </li>
           <li class="photos__card">
-            <figure class="photos__figure">
-              <img class="photos__image" src="./images/dombai.jpg" alt="картинка">
-              <figcaption class="photos__figcaption">Домбаи</figcaption> 
-            </figure>
-            <div class="photos__like">
-              <button class="photos__like-button" aria-label="лайк" type="submit"></button>
-            </div>
-          </li>
-          <li class="photos__card">
-            <figure class="photos__figure">
-              <img class="photos__image" src="./images/karachaevsk.jpg" alt="картинка">
-              <figcaption class="photos__figcaption">Карачаево-Черкесия</figcaption> 
-            </figure>
-            <div class="photos__like">
+            <img class="photos__image" src="./images/karachaevsk.jpg" alt="картинка">
+            <div class="photos__info">
+              <h2 class="photos__name">Карачаево-Черкесия</h2>
               <button class="photos__like-button" aria-label="лайк" type="submit"></button>
             </div>
           </li>
@@ -101,6 +89,6 @@
       </div>
     </div>
   </div>
-  <script src="./index.js"></script>
+  <script src="./script/index.js"></script>
 </body>
 </html>

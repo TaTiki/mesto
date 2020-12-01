@@ -1,6 +1,7 @@
 .photos__like {
-  position: relative;
-  bottom: 50px;
+  display: grid;
+  position: inherit;
+  bottom: 48px;
   left: 250px;
   max-width: 30px;
   text-align: center;
