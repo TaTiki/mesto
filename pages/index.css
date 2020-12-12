@@ -13,6 +13,7 @@
 @import url(../blocks/profile/__container/profile__container.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/photos/photos.css);
+@import url(../blocks/photos/__delete-button/photos__delete-button.css);
 @import url(../blocks/photos/__list/photos__list.css);
 @import url(../blocks/photos/__like/photos__like.css);
 @import url(../blocks/photos/__like-button/photos__like-button.css);
@@ -31,3 +32,7 @@
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__header/form__header.css);
 @import url(../blocks/form/__fieldset/form__fieldset.css);
+@import url(../blocks/form-photos/form-photos.css);
+@import url(../blocks/form-photos/__image/form-photos__image.css);
+@import url(../blocks/form-photos/__info/form-photos__info.css);
+@import url(../blocks/form-photos/__container/form-photos__container.css);
