@@ -71,7 +71,7 @@ const showForm = (form) => {
 }
 
 const hideForm = () => {
-  page.removeChild(document.getElementById('popup'));
+  page.removeChild(document.getElementsByClassName('popup popup_opened')[0]);
 }
 
 const saveProfileChanges = (form) => {
