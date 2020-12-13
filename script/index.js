@@ -143,7 +143,7 @@ const addPlacehandler = (evt) => {
 }
 
 popupPhoto.addEventListener('click', (evt) => {
-  if(evt.target.className === 'form__close-btn'){
+  if(evt.target.className === 'popup__close-btn'){
     evt.preventDefault();
     showForm(popupPhoto);
   }
