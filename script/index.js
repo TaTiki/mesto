@@ -12,7 +12,7 @@ bigForm.addEventListener('click', (evt) => {
 const likeCard = (heart) => {
   heart.classList.toggle('photos__like-button-active');
 }
-
+//эта функция бкрет карту и реализует ее первой в контейнере
 const addCard = (card) => {
   cardList.insertAdjacentElement('afterbegin', card);
 }
@@ -26,7 +26,7 @@ const showPhoto = (photo, name) => {
   bigForm.querySelector('.form-photos__info').textContent = name;
   showForm(bigForm);
 }
-
+//эта функция контролирует все кнопки в card
 const clickCardHandler = (evt) => {
   const clickClassName = evt.target.className;
   if (clickClassName.startsWith('photos__like-button')){
@@ -44,14 +44,14 @@ const clickCardHandler = (evt) => {
     showPhoto(evt.target.src, evt.target.parentNode.querySelector('.photos__name').textContent);
   }
 }
-
+//пункт 1,функция берет 2 аргумента с name и link и через template вернет карту
 const renderCard = (name, link) => {
   const card = cardTemplate.cloneNode(true);
   card.querySelector('.photos__name').textContent = name;
   card.querySelector('.photos__image').src = link;
   return card;
 } 
-
+//эта функция берет массив карт и делает рендер всех карт в контейнер
 const renderCardsArray = (cards) => {
   cards.forEach((card) => {
     const tmp = renderCard(card.name, card.link);
@@ -65,11 +65,11 @@ const formTemplate = document.getElementById('form').content.firstElementChild;
 const page = document.querySelector('.page');
 const profileName = document.querySelector('.profile__name');
 const profileHobby = document.querySelector('.profile__hobby');
-
+//эта функция берет форму и добавляет этот элемент в тело HTML
 const showForm = (form) => {
   page.appendChild(form);
 }
-
+// удаляет из тела HTML форму
 const hideForm = () => {
   page.removeChild(document.getElementsByClassName('popup popup_opened')[0]);
 }
