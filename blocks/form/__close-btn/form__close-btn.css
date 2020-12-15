@@ -1,4 +1,4 @@
-.popup__close-btn {
+.form__close-btn {
   position: absolute;
   top: -40px;
   right: -40px;
@@ -13,29 +13,29 @@
   transition: opacity 0.3s ease;
 }
 
-.popup__close-btn:hover {
+.form__close-btn:hover {
   opacity: 0.6;
 }
 
-.popup__close-btn:focus {
+.form__close-btn:focus {
   opacity: 0.6;
 }
 
 @media screen and (max-width: 767px) {
-  .popup__close-btn {
+  .form__close-btn {
     width: 30.7px;
     height: 30.7px;
   }
 }
 
 @media screen and (max-width: 424px) {
-  .popup__close-btn {
+  .form__close-btn {
     right: 0;
   }
 }
 
 @media screen and (max-height: 450px) {
-  .popup__close-btn {
+  .form__close-btn {
     top: 0;
     right: -50px;
   }

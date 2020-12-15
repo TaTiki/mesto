@@ -31,129 +31,94 @@ const popupEditProfile = document.getElementById('edit-profile');
 const popupAddPlace = document.getElementById('add-place');
 const profileName = document.querySelector('.profile__name');
 const profileHobby = document.querySelector('.profile__hobby');
+const editProfileName = popupEditProfile.querySelector('#edit-profile-name');
+const editProfileHobby =  popupEditProfile.querySelector('#edit-profile-hobby');
+const addPlaceName = popupAddPlace.querySelector('#add-place-name');
+const addPlaceLink = popupAddPlace.querySelector('#add-place-link');
+const popupImage =  popupPhoto.querySelector('.form-photos__image');
+const popupInfo =  popupPhoto.querySelector('.form-photos__info');
 
-const likeCard = (heart) => {
-  heart.classList.toggle('photos__like-button-active');
-}
-//эта функция бкрет карту и реализует ее первой в контейнере
-const addCard = (card) => {
-  cardList.insertAdjacentElement('afterbegin', card);
+
+//эта функция берет форму и добавляет этот элемент в тело HTML
+const showForm = (form) => {
+  form.classList.add('popup_opened');
 }
 
-const deleteCard = (card) => {
-  cardList.removeChild(card);
+const hideForm = (form) => {
+  form.classList.remove('popup_opened');
 }
 
-const showPhoto = (photo, name) => {
-  popupPhoto.querySelector('.form-photos__image').src = photo;
-  popupPhoto.querySelector('.form-photos__info').textContent = name;
-  showForm(popupPhoto);
+const saveProfileChanges = () => {
+  profileName.textContent = editProfileName.value;
+  profileHobby.textContent = editProfileHobby.value;
 }
-//эта функция контролирует все кнопки в card
-const clickCardHandler = (evt) => {
-  const clickClassName = evt.target.className;
-  if (clickClassName.startsWith('photos__like-button')){
-    evt.preventDefault();
-    likeCard(evt.target);
-    return ;
-  }
-  if (clickClassName === 'photos__delete-button'){
-    evt.preventDefault();
-    deleteCard(evt.currentTarget);
-    return ;
-  }
-  if (clickClassName === 'photos__image'){
-    evt.preventDefault();
-    showPhoto(evt.target.src, evt.target.parentNode.querySelector('.photos__name').textContent);
-  }
+
+const addPlace = () => {
+  const card = renderCard(addPlaceName.value, addPlaceLink.value);
+  cardList.prepend(card);
+  addPlaceName.value = '';
+  addPlaceLink.value = '';
 }
+
+document.querySelector('.profile__edit-button').addEventListener('click', (evt) => {
+  evt.preventDefault();
+  editProfileName.value = profileName.textContent;
+  editProfileHobby.value = profileHobby.textContent;
+  showForm(popupEditProfile);
+});
+
+document.querySelector('.profile__add-button').addEventListener('click', (evt) => {
+  evt.preventDefault();
+  showForm(popupAddPlace);
+});
+
+document.querySelectorAll('.form__close-btn').forEach((button) => {
+  button.addEventListener('click', (evt) => {
+    hideForm(evt.target.parentNode.parentNode.parentNode);
+  })
+});
+
+popupEditProfile.querySelector('.form__save-btn').addEventListener('click', (evt) => {
+  evt.preventDefault();
+  saveProfileChanges();
+  hideForm(popupEditProfile);
+});
+
+popupAddPlace.querySelector('.form__save-btn').addEventListener('click', (evt) => {
+  evt.preventDefault();
+  addPlace();
+  hideForm(popupAddPlace);
+});
+
 //пункт 1,функция берет 2 аргумента с name и link и через template вернет карту
 const renderCard = (name, link) => {
   const card = cardTemplate.cloneNode(true);
   card.querySelector('.photos__name').textContent = name;
   card.querySelector('.photos__image').src = link;
-  card.addEventListener('click', clickCardHandler);
+  card.addEventListener('click', (evt) => {
+    const clickClassName = evt.target.className;
+    if (clickClassName.startsWith('photos__like-button')){
+      evt.preventDefault();
+      evt.target.classList.toggle('photos__like-button-active');
+      return ;
+    }
+    if (clickClassName === 'photos__delete-button'){
+      evt.preventDefault();
+      evt.currentTarget.remove();
+      return ;
+    }
+    if (clickClassName === 'photos__image'){
+      evt.preventDefault();
+      const text = evt.target.parentNode.querySelector('.photos__name').textContent;
+      popupImage.src = evt.target.src;
+      popupImage.alt = text;
+      popupInfo.textContent =  text;
+      showForm(popupPhoto);
+    }
+  });
   return card;
 } 
-//эта функция берет массив карт и делает рендер всех карт в контейнер
-const renderCardsArray = (cards) => {
-  cards.forEach((card) => {
-    const tmp = renderCard(card.name, card.link);
-    cardList.appendChild(tmp);
 
-  })
-}
-
-//эта функция берет форму и добавляет этот элемент в тело HTML
-const showForm = (form) => {
-  form.classList.toggle('popup_opened');
-}
-
-const saveProfileChanges = () => {
-  const fields = popupEditProfile.getElementsByClassName('form__input');
-  profileName.textContent = fields[0].value;
-  profileHobby.textContent = fields[1].value;
-}
-
-const addPlace = () => {
-  const fields = popupAddPlace.getElementsByClassName('form__input');
-  const card = renderCard(fields[0].value, fields[1].value);
-  addCard(card);
-}
-
-const personClickHandler = (evt) => {
-  const cName = evt.target.className;
-  if(cName === 'form__close-btn'){
-    evt.preventDefault();
-    showForm(popupEditProfile);
-    return ;
-  }
-  if (cName === 'form__save-btn'){
-    evt.preventDefault();
-    saveProfileChanges();
-    showForm(popupEditProfile);
-  }
-} 
-
-const placeClickHandler = (evt) => {
-  const cName = evt.target.className;
-  if(cName === 'form__close-btn'){
-    evt.preventDefault();
-    showForm(popupAddPlace);
-    return ;
-  }
-  if (cName === 'form__save-btn'){
-    evt.preventDefault();
-    addPlace();
-    showForm(popupAddPlace);
-  }
-}
-
-const editPersonHandler = (evt) => {
-  evt.preventDefault();
-  const fields = popupEditProfile.getElementsByClassName('form__input');
-  fields[0].value = profileName.textContent;
-  fields[1].value = profileHobby.textContent;
-  showForm(popupEditProfile);
-} 
-
-const addPlacehandler = (evt) => {
-  evt.preventDefault();
-  showForm(popupAddPlace);
-}
-
-popupPhoto.addEventListener('click', (evt) => {
-  if(evt.target.className === 'popup__close-btn'){
-    evt.preventDefault();
-    showForm(popupPhoto);
-  }
+initialCards.forEach((card) => {
+  cardList.append(renderCard(card.name, card.link));
 })
-
-popupEditProfile.addEventListener('click', personClickHandler);
-
-popupAddPlace.addEventListener('click', placeClickHandler);
-
-document.querySelector('.profile__edit-button').addEventListener('click', editPersonHandler);
-document.querySelector('.profile__add-button').addEventListener('click', addPlacehandler)
-
-renderCardsArray(initialCards);

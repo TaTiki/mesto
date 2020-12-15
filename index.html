@@ -34,8 +34,8 @@
           <form class="form" name="inform">
             <h3 class="form__header">Редактировать профиль</h3>
             <fieldset class="form__fieldset">
-              <input class="form__input" type="text">
-              <input class="form__input" type="text">
+              <input class="form__input" type="text" id="edit-profile-name">
+              <input class="form__input" type="text" id="edit-profile-hobby">
               <button class="form__save-btn" type="submit">Сохранить</button>
             </fieldset>
             <button class="form__close-btn" type="reset" aria-label="Закрыть форму"></button>
@@ -47,8 +47,8 @@
           <form class="form" name="inform">
             <h3 class="form__header">Новое место</h3>
             <fieldset class="form__fieldset">
-              <input class="form__input" type="text" placeholder="Название">
-              <input class="form__input" type="text" placeholder="Ссылка на картинку">
+              <input class="form__input" type="text" placeholder="Название" id="add-place-name">
+              <input class="form__input" type="text" placeholder="Ссылка на картинку" id="add-place-link">
               <button class="form__save-btn" type="submit">Создать</button>
             </fieldset>
             <button class="form__close-btn" type="reset" aria-label="Закрыть форму"></button>
@@ -60,8 +60,8 @@
           <form class="form-photos">
             <img class="form-photos__image" alt="картинка" src="babis.jpg">
             <h4 class="form-photos__info"></h4>
+            <button class="form__close-btn" aria-label="закрыть просмотр фотографии"></button>
           </form>
-          <button class="popup__close-btn" aria-label="закрыть просмотр фотографии"></button>
         </div>
       </div>
     </main>
