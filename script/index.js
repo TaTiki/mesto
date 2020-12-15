@@ -48,18 +48,6 @@ const hideForm = (form) => {
   form.classList.remove('popup_opened');
 }
 
-const saveProfileChanges = () => {
-  profileName.textContent = editProfileName.value;
-  profileHobby.textContent = editProfileHobby.value;
-}
-
-const addPlace = () => {
-  const card = renderCard(addPlaceName.value, addPlaceLink.value);
-  cardList.prepend(card);
-  addPlaceName.value = '';
-  addPlaceLink.value = '';
-}
-
 document.querySelector('.profile__edit-button').addEventListener('click', (evt) => {
   evt.preventDefault();
   editProfileName.value = profileName.textContent;
@@ -69,24 +57,28 @@ document.querySelector('.profile__edit-button').addEventListener('click', (evt) 
 
 document.querySelector('.profile__add-button').addEventListener('click', (evt) => {
   evt.preventDefault();
+  addPlaceName.value = '';
+  addPlaceLink.value = '';
   showForm(popupAddPlace);
 });
 
 document.querySelectorAll('.form__close-btn').forEach((button) => {
   button.addEventListener('click', (evt) => {
+    evt.preventDefault();
     hideForm(evt.target.parentNode.parentNode.parentNode);
   })
 });
 
 popupEditProfile.querySelector('.form__save-btn').addEventListener('click', (evt) => {
   evt.preventDefault();
-  saveProfileChanges();
+  profileName.textContent = editProfileName.value;
+  profileHobby.textContent = editProfileHobby.value;
   hideForm(popupEditProfile);
 });
 
 popupAddPlace.querySelector('.form__save-btn').addEventListener('click', (evt) => {
   evt.preventDefault();
-  addPlace();
+  cardList.prepend(renderCard(addPlaceName.value, addPlaceLink.value));
   hideForm(popupAddPlace);
 });
 
