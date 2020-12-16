@@ -85,8 +85,10 @@ popupAddPlace.querySelector('.form__save-btn').addEventListener('click', (evt) =
 //пункт 1,функция берет 2 аргумента с name и link и через template вернет карту
 const renderCard = (name, link) => {
   const card = cardTemplate.cloneNode(true);
+  const photo = card.querySelector('.photos__image');
   card.querySelector('.photos__name').textContent = name;
-  card.querySelector('.photos__image').src = link;
+  photo.src = link;
+  photo.alt = name;
   card.addEventListener('click', (evt) => {
     const clickClassName = evt.target.className;
     if (clickClassName.startsWith('photos__like-button')){
