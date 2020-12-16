@@ -32,7 +32,7 @@
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__header/form__header.css);
 @import url(../blocks/form/__fieldset/form__fieldset.css);
-@import url(../blocks/form/__photos-form/form__photos-form.css);
-@import url(../blocks/form/__photos-image/form__photos-image.css);
-@import url(../blocks/form/__photos-info/form__photos-info.css);
-@import url(../blocks/form/__close-btn/form__close-btn.css);
+@import url(../blocks/form-photos/form-photos.css);
+@import url(../blocks/form-photos/__image/form-photos__image.css);
+@import url(../blocks/form-photos/__info/form-photos__info.css);
+@import url(../blocks/popup/__close-btn/popup__close-btn.css);

@@ -35,8 +35,8 @@ const editProfileName = popupEditProfile.querySelector('#edit-profile-name');
 const editProfileHobby =  popupEditProfile.querySelector('#edit-profile-hobby');
 const addPlaceName = popupAddPlace.querySelector('#add-place-name');
 const addPlaceLink = popupAddPlace.querySelector('#add-place-link');
-const popupImage =  popupPhoto.querySelector('.form__photos-image');
-const popupInfo =  popupPhoto.querySelector('.form__photos-info');
+const popupImage =  popupPhoto.querySelector('.form-photos__image');
+const popupInfo =  popupPhoto.querySelector('.form-photos__info');
 
 
 //эта функция берет форму и добавляет этот элемент в тело HTML
@@ -62,10 +62,10 @@ document.querySelector('.profile__add-button').addEventListener('click', (evt) =
   showForm(popupAddPlace);
 });
 
-document.querySelectorAll('.form__close-btn').forEach((button) => {
+document.querySelectorAll('.popup__close-btn').forEach((button) => {
   button.addEventListener('click', (evt) => {
     evt.preventDefault();
-    hideForm(evt.target.parentNode.parentNode.parentNode);
+    hideForm(evt.target.parentNode.parentNode);
   })
 });
 
