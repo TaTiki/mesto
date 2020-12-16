@@ -35,8 +35,8 @@ const editProfileName = popupEditProfile.querySelector('#edit-profile-name');
 const editProfileHobby =  popupEditProfile.querySelector('#edit-profile-hobby');
 const addPlaceName = popupAddPlace.querySelector('#add-place-name');
 const addPlaceLink = popupAddPlace.querySelector('#add-place-link');
-const popupImage =  popupPhoto.querySelector('.form-photos__image');
-const popupInfo =  popupPhoto.querySelector('.form-photos__info');
+const popupImage =  popupPhoto.querySelector('.form__photos-image');
+const popupInfo =  popupPhoto.querySelector('.form__photos-info');
 
 
 //эта функция берет форму и добавляет этот элемент в тело HTML
