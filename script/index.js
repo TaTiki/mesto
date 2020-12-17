@@ -94,10 +94,10 @@ const renderCard = (name, link) => {
     evt.target.parentNode.parentNode.remove();
   });
   card.querySelector('.photos__image').addEventListener('click', (evt) => {
-    const text = evt.target.parentNode.querySelector('.photos__name').textContent;
+    //const text = evt.target.parentNode.querySelector('.photos__name').textContent;
     popupImage.src = evt.target.src;
-    popupImage.alt = text;
-    popupInfo.textContent =  text;
+    popupImage.alt = name;
+    popupInfo.textContent = name;
     showForm(popupPhoto);
   });
   return card;
