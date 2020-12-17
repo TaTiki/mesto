@@ -29,6 +29,7 @@ const cardTemplate = document.getElementById('card').content.firstElementChild;
 const popupPhoto = document.getElementById('show-photo');
 const popupEditProfile = document.getElementById('edit-profile');
 const popupAddPlace = document.getElementById('add-place');
+const addPlaceForm = popupAddPlace.querySelector('.form');
 const profileName = document.querySelector('.profile__name');
 const profileHobby = document.querySelector('.profile__hobby');
 const editProfileName = popupEditProfile.querySelector('#edit-profile-name');
@@ -49,34 +50,31 @@ const hideForm = (form) => {
 }
 
 document.querySelector('.profile__edit-button').addEventListener('click', (evt) => {
-  evt.preventDefault();
   editProfileName.value = profileName.textContent;
   editProfileHobby.value = profileHobby.textContent;
   showForm(popupEditProfile);
 });
 
 document.querySelector('.profile__add-button').addEventListener('click', (evt) => {
-  evt.preventDefault();
-  addPlaceName.value = '';
-  addPlaceLink.value = '';
+  addPlaceForm.reset();
   showForm(popupAddPlace);
 });
 
 document.querySelectorAll('.popup__close-btn').forEach((button) => {
   button.addEventListener('click', (evt) => {
-    evt.preventDefault();
     hideForm(evt.target.parentNode.parentNode);
   })
 });
 
-popupEditProfile.querySelector('.form__save-btn').addEventListener('click', (evt) => {
+popupEditProfile.querySelector('.form').addEventListener('submit', (evt) => {
   evt.preventDefault();
   profileName.textContent = editProfileName.value;
   profileHobby.textContent = editProfileHobby.value;
   hideForm(popupEditProfile);
 });
 
-popupAddPlace.querySelector('.form__save-btn').addEventListener('click', (evt) => {
+
+addPlaceForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   cardList.prepend(renderCard(addPlaceName.value, addPlaceLink.value));
   hideForm(popupAddPlace);
@@ -89,26 +87,18 @@ const renderCard = (name, link) => {
   card.querySelector('.photos__name').textContent = name;
   photo.src = link;
   photo.alt = name;
-  card.addEventListener('click', (evt) => {
-    const clickClassName = evt.target.className;
-    if (clickClassName.startsWith('photos__like-button')){
-      evt.preventDefault();
-      evt.target.classList.toggle('photos__like-button-active');
-      return ;
-    }
-    if (clickClassName === 'photos__delete-button'){
-      evt.preventDefault();
-      evt.currentTarget.remove();
-      return ;
-    }
-    if (clickClassName === 'photos__image'){
-      evt.preventDefault();
-      const text = evt.target.parentNode.querySelector('.photos__name').textContent;
-      popupImage.src = evt.target.src;
-      popupImage.alt = text;
-      popupInfo.textContent =  text;
-      showForm(popupPhoto);
-    }
+  card.querySelector('.photos__like-button').addEventListener('click', (evt) => {
+    evt.target.classList.toggle('photos__like-button-active');
+  });
+  card.querySelector('.photos__delete-button').addEventListener('click', (evt) => {
+    evt.target.parentNode.parentNode.remove();
+  });
+  card.querySelector('.photos__image').addEventListener('click', (evt) => {
+    const text = evt.target.parentNode.querySelector('.photos__name').textContent;
+    popupImage.src = evt.target.src;
+    popupImage.alt = text;
+    popupInfo.textContent =  text;
+    showForm(popupPhoto);
   });
   return card;
 } 
