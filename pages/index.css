@@ -36,3 +36,6 @@
 @import url(../blocks/form-photos/__image/form-photos__image.css);
 @import url(../blocks/form-photos/__info/form-photos__info.css);
 @import url(../blocks/popup/__close-btn/popup__close-btn.css);
+@import url(../blocks/form/__error/form__error.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__save-btn-inactive/form__save-btn-inactive.css);

@@ -53,11 +53,13 @@ document.querySelector('.profile__edit-button').addEventListener('click', (evt) 
   editProfileName.value = profileName.textContent;
   editProfileHobby.value = profileHobby.textContent;
   showForm(popupEditProfile);
+  popupEditProfile.focus();
 });
 
 document.querySelector('.profile__add-button').addEventListener('click', (evt) => {
   addPlaceForm.reset();
   showForm(popupAddPlace);
+  popupAddPlace.focus();
 });
 
 document.querySelectorAll('.popup__close-btn').forEach((button) => {
@@ -99,10 +101,29 @@ const renderCard = (name, link) => {
     popupImage.alt = name;
     popupInfo.textContent = name;
     showForm(popupPhoto);
+    popupPhoto.focus();
   });
   return card;
 } 
 
+
+Array.from(document.querySelectorAll('.popup')).forEach((popup) => {
+  popup.addEventListener('keydown', (evt) => {
+    //console.log('babis');
+    if(evt.key === 'Escape') {
+      hideForm(popup);
+    }
+  })
+  popup.addEventListener('click', (evt) => {
+    if(evt.target.classList.contains('popup')) {
+      hideForm(popup);
+    }
+  })
+})
+
 initialCards.forEach((card) => {
   cardList.append(renderCard(card.name, card.link));
 })
+
+editProfileName.value = profileName.textContent;
+editProfileHobby.value = profileHobby.textContent;

@@ -29,33 +29,37 @@
         <ul class="photos__list">
         </ul>
       </section>
-      <div class="popup" id="edit-profile">
+      <div class="popup" id="edit-profile" tabindex="-1">
         <div class="popup__container">
-          <form class="form" name="inform">
+          <form class="form" name="inform" novalidate>
             <h3 class="form__header">Редактировать профиль</h3>
             <fieldset class="form__fieldset">
-              <input class="form__input" type="text" id="edit-profile-name">
-              <input class="form__input" type="text" id="edit-profile-hobby">
+              <input class="form__input" type="text" id="edit-profile-name" required minlength="2" maxlength="40">
+              <span class="form__input-error edit-profile-name-error"></span>
+              <input class="form__input" type="text" id="edit-profile-hobby" required minlength="2" maxlength="200">
+              <span class="form__input-error edit-profile-hobby-error"></span>
               <button class="form__save-btn" type="submit">Сохранить</button>
             </fieldset>
           </form>
           <button class="popup__close-btn" type="reset" aria-label="Закрыть форму"></button>
         </div>
       </div>
-      <div class="popup" id="add-place">
+      <div class="popup" id="add-place" tabindex="-1">
         <div class="popup__container">
-          <form class="form" name="inform">
+          <form class="form" name="inform" novalidate>
             <h3 class="form__header">Новое место</h3>
             <fieldset class="form__fieldset">
-              <input class="form__input" type="text" placeholder="Название" id="add-place-name">
-              <input class="form__input" type="text" placeholder="Ссылка на картинку" id="add-place-link">
+              <input class="form__input" type="text" placeholder="Название" id="add-place-name" required minlength="2" maxlength="30">
+              <span class="form__input-error add-place-name-error"></span>
+              <input class="form__input" type="url" placeholder="Ссылка на картинку" id="add-place-link" required>
+              <span class="form__input-error add-place-link-error"></span>
               <button class="form__save-btn" type="submit">Создать</button>
             </fieldset>
           </form>
           <button class="popup__close-btn" type="reset" aria-label="Закрыть форму"></button>
         </div>
       </div>
-      <div class="popup" id="show-photo">
+      <div class="popup" id="show-photo"  tabindex="-1">
         <div class="popup__container popup__container-photos">
           <form class="form-photos">
             <img class="form-photos__image" alt="картинка" src="babis.jpg">
@@ -80,5 +84,6 @@
     </li>
   </template>
   <script src="./script/index.js"></script>
+  <script src="./script/validate.js"></script>
   </body>
 </html>
