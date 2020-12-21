@@ -38,7 +38,10 @@ const addPlaceName = popupAddPlace.querySelector('#add-place-name');
 const addPlaceLink = popupAddPlace.querySelector('#add-place-link');
 const popupImage =  popupPhoto.querySelector('.form-photos__image');
 const popupInfo =  popupPhoto.querySelector('.form-photos__info');
-
+const profileSubButton = popupEditProfile.querySelector('.form__save-btn');
+const profileInputs = popupEditProfile.querySelectorAll('.form__input');
+const addPlaceSubButton = popupAddPlace.querySelector('.form__save-btn');
+const addPlaceInputs = popupAddPlace.querySelectorAll('.form__input');
 
 //эта функция берет форму и добавляет этот элемент в тело HTML
 const showForm = (form) => {
@@ -49,15 +52,26 @@ const hideForm = (form) => {
   form.classList.remove('popup_opened');
 }
 
+const initForm = (inputList) =>{
+  inputList.forEach((input)=>{
+    input.classList.remove('form__error');
+    input.nextElementSibling.textContent='';
+  })
+}
+
 document.querySelector('.profile__edit-button').addEventListener('click', (evt) => {
   editProfileName.value = profileName.textContent;
   editProfileHobby.value = profileHobby.textContent;
+  profileSubButton.classList.remove('form__save-btn-inactive');
+  initForm(profileInputs);
   showForm(popupEditProfile);
   popupEditProfile.focus();
 });
 
 document.querySelector('.profile__add-button').addEventListener('click', (evt) => {
   addPlaceForm.reset();
+  addPlaceSubButton.classList.add('form__save-btn-inactive');
+  initForm(addPlaceInputs);
   showForm(popupAddPlace);
   popupAddPlace.focus();
 });
@@ -70,6 +84,9 @@ document.querySelectorAll('.popup__close-btn').forEach((button) => {
 
 popupEditProfile.querySelector('.form').addEventListener('submit', (evt) => {
   evt.preventDefault();
+  if(profileSubButton.classList.contains('form__save-btn-inactive')) {
+    return
+  }
   profileName.textContent = editProfileName.value;
   profileHobby.textContent = editProfileHobby.value;
   hideForm(popupEditProfile);
@@ -78,6 +95,9 @@ popupEditProfile.querySelector('.form').addEventListener('submit', (evt) => {
 
 addPlaceForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
+  if(addPlaceSubButton.classList.contains('form__save-btn-inactive')) {
+    return
+  }
   cardList.prepend(renderCard(addPlaceName.value, addPlaceLink.value));
   hideForm(popupAddPlace);
 });
@@ -125,5 +145,5 @@ initialCards.forEach((card) => {
   cardList.append(renderCard(card.name, card.link));
 })
 
-editProfileName.value = profileName.textContent;
-editProfileHobby.value = profileHobby.textContent;
+//editProfileName.value = profileName.textContent;
+//editProfileHobby.value = profileHobby.textContent;
