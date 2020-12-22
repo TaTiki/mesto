@@ -43,13 +43,21 @@ const profileInputs = popupEditProfile.querySelectorAll('.form__input');
 const addPlaceSubButton = popupAddPlace.querySelector('.form__save-btn');
 const addPlaceInputs = popupAddPlace.querySelectorAll('.form__input');
 
-//эта функция берет форму и добавляет этот элемент в тело HTML
-const showForm = (form) => {
-  form.classList.add('popup_opened');
+const closeByEscape = (evt) => {
+  if(evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened')
+    closePopup(openedPopup);
+  }
 }
 
-const hideForm = (form) => {
-  form.classList.remove('popup_opened');
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEscape); 
+}
+
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEscape); 
 }
 
 const initForm = (inputList) =>{
@@ -59,26 +67,24 @@ const initForm = (inputList) =>{
   })
 }
 
-document.querySelector('.profile__edit-button').addEventListener('click', (evt) => {
+document.querySelector('.profile__edit-button').addEventListener('click', () => {
   editProfileName.value = profileName.textContent;
   editProfileHobby.value = profileHobby.textContent;
   profileSubButton.classList.remove('form__save-btn-inactive');
   initForm(profileInputs);
-  showForm(popupEditProfile);
-  popupEditProfile.focus();
+  openPopup(popupEditProfile);
 });
 
-document.querySelector('.profile__add-button').addEventListener('click', (evt) => {
+document.querySelector('.profile__add-button').addEventListener('click', () => {
   addPlaceForm.reset();
   addPlaceSubButton.classList.add('form__save-btn-inactive');
   initForm(addPlaceInputs);
-  showForm(popupAddPlace);
-  popupAddPlace.focus();
+  openPopup(popupAddPlace);
 });
 
 document.querySelectorAll('.popup__close-btn').forEach((button) => {
   button.addEventListener('click', (evt) => {
-    hideForm(evt.target.parentNode.parentNode);
+    closePopup(evt.target.parentNode.parentNode);
   })
 });
 
@@ -89,7 +95,7 @@ popupEditProfile.querySelector('.form').addEventListener('submit', (evt) => {
   }
   profileName.textContent = editProfileName.value;
   profileHobby.textContent = editProfileHobby.value;
-  hideForm(popupEditProfile);
+  closePopup(popupEditProfile);
 });
 
 
@@ -99,10 +105,9 @@ addPlaceForm.addEventListener('submit', (evt) => {
     return
   }
   cardList.prepend(renderCard(addPlaceName.value, addPlaceLink.value));
-  hideForm(popupAddPlace);
+  closePopup(popupAddPlace);
 });
 
-//пункт 1,функция берет 2 аргумента с name и link и через template вернет карту
 const renderCard = (name, link) => {
   const card = cardTemplate.cloneNode(true);
   const photo = card.querySelector('.photos__image');
@@ -115,28 +120,20 @@ const renderCard = (name, link) => {
   card.querySelector('.photos__delete-button').addEventListener('click', (evt) => {
     evt.target.parentNode.parentNode.remove();
   });
-  card.querySelector('.photos__image').addEventListener('click', (evt) => {
-    //const text = evt.target.parentNode.querySelector('.photos__name').textContent;
-    popupImage.src = evt.target.src;
+  photo.addEventListener('click', () => {
+    popupImage.src = link;
     popupImage.alt = name;
     popupInfo.textContent = name;
-    showForm(popupPhoto);
-    popupPhoto.focus();
+    openPopup(popupPhoto);
   });
   return card;
 } 
 
 
 Array.from(document.querySelectorAll('.popup')).forEach((popup) => {
-  popup.addEventListener('keydown', (evt) => {
-    //console.log('babis');
-    if(evt.key === 'Escape') {
-      hideForm(popup);
-    }
-  })
   popup.addEventListener('click', (evt) => {
     if(evt.target.classList.contains('popup')) {
-      hideForm(popup);
+      closePopup(popup);
     }
   })
 })
@@ -144,6 +141,3 @@ Array.from(document.querySelectorAll('.popup')).forEach((popup) => {
 initialCards.forEach((card) => {
   cardList.append(renderCard(card.name, card.link));
 })
-
-//editProfileName.value = profileName.textContent;
-//editProfileHobby.value = profileHobby.textContent;
