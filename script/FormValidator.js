@@ -1,3 +1,6 @@
+const INPUT = 'input';
+const FORM_ERROR = 'form__error';
+
 export default class FormValidator {
   constructor(config, id) {
     this._formSelector = config.formSelector;
@@ -16,10 +19,9 @@ export default class FormValidator {
 
   _setEventListeners = () => {
     this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
-    this._inputArray = Array.from(this._inputList);
     this._buttonElement = this._form.querySelector(this._submitButtonSelector);
     this._inputList.forEach((inputElement) => {
-      inputElement.addEventListener('input', () => {
+      inputElement.addEventListener(INPUT, () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
       })
@@ -37,8 +39,10 @@ export default class FormValidator {
   _toggleButtonState = () => {
     if(this._hasInvalidInput()) {
       this._buttonElement.classList.add(this._inactiveButtonClass);
+      this._buttonElement.disabled = true;
     }else{
       this._buttonElement.classList.remove(this._inactiveButtonClass);
+      this._buttonElement.disabled = false;
     }
   };
 
@@ -55,11 +59,30 @@ export default class FormValidator {
   };
 
   _hasInvalidInput = () => {
-    for (let i=0; i<this._inputArray.length; i++) {
-      if (!this._inputArray[i].validity.valid) {
-        return true;
-      }
-    }
-    return false;
+    return this._inputList.some((inputElement) => {
+      return !inputElement.validity.valid;
+    });
   };
+
+  _clearErrors = () => {
+    const errorElements = Array.from(this._form.querySelectorAll('.form__input-error'));
+    errorElements.forEach((errorElement)=> {
+      errorElement.textContent = '';
+    });
+    this._inputList.forEach((input)=> {
+      input.classList.remove(FORM_ERROR);
+    });
+  }
+  resetValidation = () => {
+    this._clearErrors();
+    this._toggleButtonState();
+  }
+
 }
+
+const initForm = (inputList) =>{
+  inputList.forEach((input)=>{
+    input.classList.remove(FORM_ERROR);
+    input.nextElementSibling.textContent='';
+  })
+};
