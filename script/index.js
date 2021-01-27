@@ -28,93 +28,79 @@ const initialCards = [
   }
 ]; 
 
-const PROFILE_EDIT_BUTTON_CLASS = '.profile__edit-button';
-const CLICK = 'click';
-const FORM_SAVE_BUTTON_INACTIVE = 'form__save-btn-inactive';
-const PROFILE_ADD_BUTTON_CLASS = '.profile__add-button';
-const POPUP_CLOSE_BUTTON_CLASS = '.popup__close-btn';
-const POPUP_CLASS = '.popup';
-const FORM_CLASS = '.form';
-const SUBMIT = 'submit';
-const POPUP = 'popup';
-const CARD_ID = '#card';
-
 const config = {
-  formSelector: FORM_CLASS,
+  formSelector: '.form',
   fieldsetSelector: '.form__fieldset',
   inputSelector: '.form__input',
   submitButtonSelector: '.form__save-btn',
-  inactiveButtonClass: FORM_SAVE_BUTTON_INACTIVE,
+  inactiveButtonClass: 'form__save-btn-inactive',
   inputErrorClass: 'form__error',
+  errorClass: '.form__input-error',
 };
 
+const cardSelector = '#card';
+
 const cardList = document.querySelector('.photos__list');
-const popupEditProfile = document.getElementById('edit-profile');
-const popupAddPlace = document.getElementById('add-place');
-const addPlaceForm = popupAddPlace.querySelector(FORM_CLASS);
+const popupEditProfile = document.querySelector('#edit-profile');
+const popupAddPlace = document.querySelector('#add-place');
+const addPlaceForm = popupAddPlace.querySelector('.form');
 const profileName = document.querySelector('.profile__name');
 const profileHobby = document.querySelector('.profile__hobby');
 const editProfileName = popupEditProfile.querySelector('#edit-profile-name');
 const editProfileHobby =  popupEditProfile.querySelector('#edit-profile-hobby');
 const addPlaceName = popupAddPlace.querySelector('#add-place-name');
 const addPlaceLink = popupAddPlace.querySelector('#add-place-link');
-const profileSubButton = popupEditProfile.querySelector('.form__save-btn');
-const addPlaceSubButton = popupAddPlace.querySelector('.form__save-btn');
+const profileEditButton = document.querySelector('.profile__edit-button');
+const addPlaceButton = document.querySelector('.profile__add-button');
+const closeButtons = document.querySelectorAll('.popup__close-btn');
+const popups = document.querySelectorAll('.popup');
+const editProfileForm = popupEditProfile.querySelector('.form');
+
 const editProfileFormValidator = new FormValidator(config, '#edit-profile'); 
 const addPlaceFormValidator = new FormValidator(config, '#add-place');
 
-
-document.querySelector(PROFILE_EDIT_BUTTON_CLASS).addEventListener(CLICK , () => {
+profileEditButton.addEventListener('click' , () => {
   editProfileName.value = profileName.textContent;
   editProfileHobby.value = profileHobby.textContent;
-  profileSubButton.classList.remove(FORM_SAVE_BUTTON_INACTIVE);
   editProfileFormValidator.resetValidation();
   openPopup(popupEditProfile);
 });
 
-document.querySelector(PROFILE_ADD_BUTTON_CLASS).addEventListener(CLICK , () => {
+addPlaceButton.addEventListener('click' , () => {
   addPlaceForm.reset();
-  addPlaceSubButton.classList.add(FORM_SAVE_BUTTON_INACTIVE);
   addPlaceFormValidator.resetValidation();
   openPopup(popupAddPlace);
 });
 
-document.querySelectorAll(POPUP_CLOSE_BUTTON_CLASS).forEach((button) => {
-  button.addEventListener(CLICK , (evt) => {
-    closePopup(evt.target.closest(POPUP_CLASS));
+closeButtons.forEach((button) => {
+  button.addEventListener('click', (evt) => {
+    closePopup(evt.target.closest('.popup'));
   })
 });
 
-popupEditProfile.querySelector(FORM_CLASS).addEventListener(SUBMIT, (evt) => {
+editProfileForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  if(profileSubButton.classList.contains(FORM_SAVE_BUTTON_INACTIVE)) {
-    return;
-  }
   profileName.textContent = editProfileName.value;
   profileHobby.textContent = editProfileHobby.value;
   closePopup(popupEditProfile);
 });
 
-
-addPlaceForm.addEventListener(SUBMIT, (evt) => {
+addPlaceForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  if(addPlaceSubButton.classList.contains(FORM_SAVE_BUTTON_INACTIVE)) {
-    return;
-  }
-  cardList.prepend(new Card(addPlaceName.value, addPlaceLink.value, CARD_ID).generateCard());
+  cardList.prepend(new Card(addPlaceName.value, addPlaceLink.value, cardSelector).generateCard());
   closePopup(popupAddPlace);
 }); 
 
-Array.from(document.querySelectorAll(POPUP_CLASS)).forEach((popup) => {
-  popup.addEventListener(CLICK , (evt) => {
-    if(evt.target.classList.contains(POPUP)) {
+Array.from(popups).forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if(evt.target.classList.contains('popup')) {
       closePopup(popup);
     }
   })
 });
 
 initialCards.forEach((card) => {
-  cardList.append(new Card(card.name, card.link, CARD_ID).generateCard());
+  cardList.append(new Card(card.name, card.link, cardSelector).generateCard());
 });
 
 editProfileFormValidator.enableValidation();

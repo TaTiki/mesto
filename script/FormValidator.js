@@ -1,6 +1,3 @@
-const INPUT = 'input';
-const FORM_ERROR = 'form__error';
-
 export default class FormValidator {
   constructor(config, id) {
     this._formSelector = config.formSelector;
@@ -9,19 +6,22 @@ export default class FormValidator {
     this._submitButtonSelector = config.submitButtonSelector;
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config. inputErrorClass;
+    this._errorClass = config.errorClass;
     this._id = id;
+    this._form = document.querySelector(this._id).querySelector(this._formSelector);
+    this._errorElements = Array.from(this._form.querySelectorAll( this._errorClass));
+    this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
+    this._buttonElement = this._form.querySelector(this._submitButtonSelector);
   }
   
   enableValidation = () => {
-    this._form = document.querySelector(this._id).querySelector(this._formSelector);
     this._setEventListeners();
   };
 
   _setEventListeners = () => {
-    this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
-    this._buttonElement = this._form.querySelector(this._submitButtonSelector);
+    
     this._inputList.forEach((inputElement) => {
-      inputElement.addEventListener(INPUT, () => {
+      inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
       })
@@ -65,24 +65,15 @@ export default class FormValidator {
   };
 
   _clearErrors = () => {
-    const errorElements = Array.from(this._form.querySelectorAll('.form__input-error'));
-    errorElements.forEach((errorElement)=> {
+    this._errorElements.forEach((errorElement)=> {
       errorElement.textContent = '';
     });
     this._inputList.forEach((input)=> {
-      input.classList.remove(FORM_ERROR);
+      input.classList.remove(this._inputErrorClass);
     });
   }
   resetValidation = () => {
     this._clearErrors();
     this._toggleButtonState();
   }
-
 }
-
-const initForm = (inputList) =>{
-  inputList.forEach((input)=>{
-    input.classList.remove(FORM_ERROR);
-    input.nextElementSibling.textContent='';
-  })
-};
