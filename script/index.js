@@ -1,6 +1,7 @@
-import Card,{openPopup,closePopup} from './Card.js';
-import FormValidator from './FormValidator.js';
-
+import Card,{openPopup,closePopup} from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import Popup from '../components/Popup.js';
 const initialCards = [
   {
       name: 'Архыз',
@@ -40,21 +41,31 @@ const config = {
 
 const cardSelector = '#card';
 
-const cardList = document.querySelector('.photos__list');
-const popupEditProfile = document.querySelector('#edit-profile');
-const popupAddPlace = document.querySelector('#add-place');
-const addPlaceForm = popupAddPlace.querySelector('.form');
+//const cardList = document.querySelector('.photos__list');
+const cardList = new Section({
+  data: initialCards, 
+  renderer: (card) =>{
+    cardList.addItem(new Card(card, cardSelector).generateCard());
+  }
+}, '.photos__list');
+//const popupEditProfile = document.querySelector('#edit-profile');
+const popupEditProfile = new Popup('#edit-profile');
+popupEditProfile.setEventListeners();
+//const popupAddPlace = document.querySelector('#add-place');
+const popupAddPlace = new Popup('#add-place');
+popupAddPlace.setEventListeners();
+const addPlaceForm = document.querySelector('#add-place').querySelector('.form');
 const profileName = document.querySelector('.profile__name');
 const profileHobby = document.querySelector('.profile__hobby');
-const editProfileName = popupEditProfile.querySelector('#edit-profile-name');
-const editProfileHobby =  popupEditProfile.querySelector('#edit-profile-hobby');
-const addPlaceName = popupAddPlace.querySelector('#add-place-name');
-const addPlaceLink = popupAddPlace.querySelector('#add-place-link');
+const editProfileName = document.querySelector('#edit-profile').querySelector('#edit-profile-name');
+const editProfileHobby =  document.querySelector('#edit-profile').querySelector('#edit-profile-hobby');
+const addPlaceName = document.querySelector('#add-place').querySelector('#add-place-name');
+const addPlaceLink = document.querySelector('#add-place').querySelector('#add-place-link');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const addPlaceButton = document.querySelector('.profile__add-button');
 const closeButtons = document.querySelectorAll('.popup__close-btn');
 const popups = document.querySelectorAll('.popup');
-const editProfileForm = popupEditProfile.querySelector('.form');
+const editProfileForm = document.querySelector('#edit-profile').querySelector('.form');
 
 const editProfileFormValidator = new FormValidator(config, '#edit-profile'); 
 const addPlaceFormValidator = new FormValidator(config, '#add-place');
@@ -63,45 +74,55 @@ profileEditButton.addEventListener('click' , () => {
   editProfileName.value = profileName.textContent;
   editProfileHobby.value = profileHobby.textContent;
   editProfileFormValidator.resetValidation();
-  openPopup(popupEditProfile);
+//  openPopup(popupEditProfile);
+  popupEditProfile.open();
 });
 
 addPlaceButton.addEventListener('click' , () => {
   addPlaceForm.reset();
   addPlaceFormValidator.resetValidation();
-  openPopup(popupAddPlace);
+  //openPopup(popupAddPlace);
+  popupAddPlace.open();
 });
 
-closeButtons.forEach((button) => {
+/*closeButtons.forEach((button) => {
   button.addEventListener('click', (evt) => {
     closePopup(evt.target.closest('.popup'));
   })
-});
+});*/
 
 editProfileForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   profileName.textContent = editProfileName.value;
   profileHobby.textContent = editProfileHobby.value;
-  closePopup(popupEditProfile);
+//  closePopup(popupEditProfile);
+  popupEditProfile.close();
 });
 
 addPlaceForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  cardList.prepend(new Card(addPlaceName.value, addPlaceLink.value, cardSelector).generateCard());
-  closePopup(popupAddPlace);
+ // cardList.prepend(new Card(addPlaceName.value, addPlaceLink.value, cardSelector).generateCard());
+ cardList.addItemAtTop(new Card({
+   name: addPlaceName.value,
+   link: addPlaceLink.value,
+ },cardSelector).generateCard());
+  //closePopup(popupAddPlace);
+  popupAddPlace.close();
 }); 
 
-Array.from(popups).forEach((popup) => {
+/*Array.from(popups).forEach((popup) => {
   popup.addEventListener('click', (evt) => {
     if(evt.target.classList.contains('popup')) {
       closePopup(popup);
     }
   })
-});
+});*/
 
-initialCards.forEach((card) => {
+/*initialCards.forEach((card) => {
   cardList.append(new Card(card.name, card.link, cardSelector).generateCard());
-});
+});*/
+
+cardList.renderItems();
 
 editProfileFormValidator.enableValidation();
 addPlaceFormValidator.enableValidation();
