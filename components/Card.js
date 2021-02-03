@@ -21,10 +21,11 @@ export const closePopup = (popup) => {
 };
 
 export default class Card {
-  constructor({name, link}, selector) {
+  constructor({name, link}, previewFunc,selector) {
     this._name = name;
     this._link = link;
     this._selector = selector;
+    this._previewFunc = previewFunc;
   }
 
   _getTemplate = () => {
@@ -52,16 +53,16 @@ export default class Card {
   }; 
 
   _setEventListeners = () => {
-      this._likeButton.addEventListener('click', () => {
+    this._likeButton.addEventListener('click', () => {
       this._toggleLike();
     });
 
-      this._deleteButton.addEventListener('click', () => {
+    this._deleteButton.addEventListener('click', () => {
       this._deleteCard();
     });
 
-      this._image.addEventListener('click', () => {
-      this._handlePreviewPicture();
+    this._image.addEventListener('click', () => {
+      this._previewFunc({name: this._name, link: this._link});
     });
   };
 
@@ -76,12 +77,5 @@ export default class Card {
     this._deleteButton = null;
     this._image = null;
     this._title = null;
-  };
-
-  _handlePreviewPicture = () => {
-    popupImage.src = this._link;
-    popupImage.alt = this._name;
-    popupInfo.textContent = this._name;
-    openPopup(popupPhoto);
   };
 }
