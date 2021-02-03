@@ -85,7 +85,7 @@ const popupAddPlace= new PopupWithForm((inputs) => {
     name: inputs[0],
     link: inputs[1],
    });
-}, '#ad-place');
+}, '#add-place');
 popupAddPlace.setEventListeners();
 
 const editProfileFormValidator = new FormValidator(config, '#edit-profile'); 
