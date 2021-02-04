@@ -6,7 +6,7 @@ export default class Card {
     this._previewFunc = previewFunc;
   }
 
-  _getTemplate = () => {
+  _getTemplate() {
       const cardElement = document
       .querySelector(this._selector)
       .content
@@ -16,7 +16,7 @@ export default class Card {
       return cardElement;
   }; 
 
-  generateCard = () => {
+  generateCard() {
     this._element = this._getTemplate();
     this._likeButton =  this._element.querySelector('.photos__like-button');
     this._deleteButton = this._element.querySelector('.photos__delete-button');
@@ -30,7 +30,7 @@ export default class Card {
     return this._element;
   }; 
 
-  _setEventListeners = () => {
+  _setEventListeners() {
     this._likeButton.addEventListener('click', () => {
       this._toggleLike();
     });
@@ -44,11 +44,11 @@ export default class Card {
     });
   };
 
-  _toggleLike = () => {
+  _toggleLike() {
     this._likeButton.classList.toggle('photos__like-button-active');
   }; 
 
-  _deleteCard = () => {
+  _deleteCard() {
     this._element.remove();
     this._element = null;
     this._likeButton = null;
