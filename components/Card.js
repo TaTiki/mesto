@@ -1,25 +1,3 @@
-const ESCAPE_KEY = 'Escape';
-const popupPhoto = document.querySelector('#show-photo');
-const popupImage =  popupPhoto.querySelector('.form-photos__image');
-const popupInfo =  popupPhoto.querySelector('.form-photos__info');
-
-export function openPopup (popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closeByEscape); 
-}
-
-const closeByEscape = (evt) => {
-  if(evt.key === ESCAPE_KEY ) {
-    const openedPopup = document.querySelector('.popup_opened')
-    closePopup(openedPopup);
-  }
-};
-
-export const closePopup = (popup) => {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeByEscape); 
-};
-
 export default class Card {
   constructor({name, link}, previewFunc,selector) {
     this._name = name;

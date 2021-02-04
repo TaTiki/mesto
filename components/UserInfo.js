@@ -1,4 +1,4 @@
- export default class UserInfo {
+export default class UserInfo {
   constructor(nameSelector, hobbySelector) {
     this._nameElement = document.querySelector(nameSelector);
     this._hobbyElement = document.querySelector(hobbySelector);
@@ -15,4 +15,4 @@
     this._nameElement.textContent = name;
     this._hobbyElement.textContent = hobby;
   }
- }
+}
