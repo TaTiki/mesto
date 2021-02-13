@@ -1,10 +1,11 @@
-import './pages/index.css';
+//import './pages/index.css';
 import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
 import PopupWithImage from './components/PopupWithImage.js';
 import PopupWithForm from './components/PopupWithForm.js';
 import UserInfo from './components/UserInfo.js'; 
+import Api from './communication/Api.js';
 import {
   initialCards, 
   profileEditButton,
@@ -27,12 +28,13 @@ const userInfo = new UserInfo('.profile__name', '.profile__hobby');
 
 const popupWithImage = new PopupWithImage('#show-photo');
 
-const cardList = new Section({
-  data: initialCards, 
-  renderer: (card) => (
-    new Card(card, popupWithImage.open, cardSelector).generateCard()
-  )
-}, '.photos__list');
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-20',
+  headers: {
+    'authorization': '6577e49f-15b9-4798-93b6-109a6b031458',
+    'Content-Type': 'application/json'
+  }
+})
 
 const popupEditProfile = new PopupWithForm((inputs) => {
   userInfo.setUserInfo({
@@ -68,4 +70,16 @@ popupAddPlace.setEventListeners();
 editProfileFormValidator.enableValidation();
 addPlaceFormValidator.enableValidation();
 
-cardList.renderItems();
+api.getInitialCards().then(res => console.log(res)).catch(err => console.log(err))
+/*api.getInitialCards()
+.then((initialCards) => {
+  const cardList = new Section({
+    data: initialCards, 
+    renderer: (card) => (
+      new Card(card, popupWithImage.open, cardSelector).generateCard()
+    )
+  }, '.photos__list');
+  cardList.renderItems();
+})*/
+
+//cardList.renderItems();
