@@ -10,7 +10,7 @@
   background-repeat: no-repeat;
   background-color: #FFFFFF;
   transition: opacity .3s ease;
-  margin: 31px 17.24px 2px 0;
+  margin: 22px 0 3px -4px;
 }
 
 .photos__like-button:hover {

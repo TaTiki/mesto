@@ -1,14 +1,12 @@
-import Popup from "./Popup.js"
+import PopupWithSubmit from "./PopupWithSubmit.js";
 
-export default class PopupWithForm extends Popup {
+export default class PopupWithForm extends PopupWithSubmit {
   constructor(submitFunc, selectorPopup) {
-    super(selectorPopup);
-    this._submitFunc = submitFunc;
-    this._formElement = this._popupElement.querySelector('.form');
+    super(submitFunc, selectorPopup);
     this._inputElements = this._formElement.querySelectorAll('.form__input');
   }
 
-  open(initValues){
+  open(initValues=undefined){
     if(initValues) {
       initValues.forEach((value, index) => {
         if(this._inputElements[index]) {
@@ -19,23 +17,9 @@ export default class PopupWithForm extends Popup {
     super.open();
   }
 
-  close(){
-    this._formElement.reset();
-    super.close();
-  }
-
-  _getInputValues() {
+  _submitFuncInput() {
     return Array.from(this._inputElements).map((input) => (
       input.value
     ))
-  }
-
-  setEventListeners() {
-    this._formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      this._submitFunc(this._getInputValues());
-      this.close();
-    });
-    super.setEventListeners();
   }
 }

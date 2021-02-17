@@ -39,3 +39,10 @@
 @import url(../blocks/form/__error/form__error.css);
 @import url(../blocks/form/__input-error/form__input-error.css);
 @import url(../blocks/form/__save-btn-inactive/form__save-btn-inactive.css);
+@import url(../blocks/photos/__like-container/photos__like-container.css);
+@import url(../blocks/photos/__like-count/photos__like-count.css);
+@import url(../blocks/profile/__container-marker/profile__container-marker.css);
+@import url(../blocks/profile/__picture-edit-button/profile__picture-edit-button.css);
+@import url(../blocks/form/__delete-card/form__delete-card.css);
+@import url(../blocks/form/__header-question/form__header-question.css);
+@import url(../blocks/form/__save-yes/form__save-yes.css);
